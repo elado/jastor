@@ -16,19 +16,18 @@ static const char *property_getTypeName(objc_property_t property) {
 
 @implementation JastorRuntimeHelper
 
-//static NSMutableDictionary *lookupTableByClass;
-
-// TODO cache these, even on device!
+static NSMutableDictionary *propertyListByClass;
+static NSMutableDictionary *propertyClassByClassAndPropertyName;
 
 + (NSArray *)propertyNames:(Class)klass {
-	//	if (!lookupTableByClass) lookupTableByClass = [NSMutableDictionary dictionary];
-	//	
-	//	NSString *className = NSStringFromClass(klass);
-	//	NSArray *value = [lookupTableByClass valueForKey:className];
-	//	
-	//	if (value) {
-	//		return value; 
-	//	}
+	if (!propertyListByClass) propertyListByClass = [[NSMutableDictionary alloc] init];
+	
+	NSString *className = NSStringFromClass(klass);
+	NSArray *value = [propertyListByClass objectForKey:className];
+	
+	if (value) {
+		return value; 
+	}
 	
     NSMutableArray *propertyNames = [[NSMutableArray alloc] init];
     unsigned int propertyCount = 0;
@@ -42,13 +41,21 @@ static const char *property_getTypeName(objc_property_t property) {
     }
     free(properties);
 	
-	//	[lookupTableByClass setObject:[propertyNames retain] forKey:className];
+	[propertyListByClass setObject:propertyNames forKey:className];
 	
-	//    return propertyNames; //[propertyNames autorelease];
     return [propertyNames autorelease];
 }
 
 + (Class)propertyClassForPropertyName:(NSString *)propertyName ofClass:(Class)klass {
+	if (!propertyClassByClassAndPropertyName) propertyClassByClassAndPropertyName = [[NSMutableDictionary alloc] init];
+	
+	NSString *key = [NSString stringWithFormat:@"%@:%@", NSStringFromClass(klass), propertyName];
+	NSString *value = [propertyClassByClassAndPropertyName objectForKey:key];
+	
+	if (value) {
+		return NSClassFromString(value);
+	}
+	
     unsigned int propertyCount = 0;
     objc_property_t *properties = class_copyPropertyList(klass, &propertyCount);
 	
@@ -60,6 +67,7 @@ static const char *property_getTypeName(objc_property_t property) {
 		if (strcmp(cPropertyName, name) == 0) {
 			free(properties);
 			NSString *className = [NSString stringWithUTF8String:property_getTypeName(property)];
+			[propertyClassByClassAndPropertyName setObject:className forKey:key];
 			return NSClassFromString(className);
 		}
     }

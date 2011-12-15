@@ -237,4 +237,8 @@ REALLY Good to know
 
 As for now, `id` is converted to `objectId` automatically. Maybe someday Jastor will have ability to map server and obj-c fields.
 
+**Jastor classes also conforms to NSCoding protocol**
+
+So you get `initWithCoder`/`encodeWithCoder` for free.
+
 **You can look at the tests for real samples**.
