@@ -32,12 +32,12 @@ Class nsArrayClass;
 				NSMutableArray *childObjects = [NSMutableArray arrayWithCapacity:[value count]];
 				
 				for (id child in value) {
-                    if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
-                        Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
-                        [childObjects addObject:childDTO];
-                    } else {
-                        [childObjects addObject:child];
-                    }
+					if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
+						Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
+						[childObjects addObject:childDTO];
+					} else {
+						[childObjects addObject:child];
+					}
 				}
 				
 				value = childObjects;
@@ -54,11 +54,11 @@ Class nsArrayClass;
 			[self setValue:objectIdValue forKey:idPropertyNameOnObject];
 		}
 	}
-	return self;    
+	return self;	
 }
 
 - (void)dealloc {
-    self.objectId = nil;
+	self.objectId = nil;
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
 		[self setValue:nil forKey:key];

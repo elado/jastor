@@ -15,15 +15,15 @@
 @implementation JastorTests
 
 - (void)setUp {
-    [super setUp];
-    
+	[super setUp];
+	
 	[Jastor class];
 	[Product class];
 	[ProductCategory class];
 }
 
 - (void)tearDown {
-    [super tearDown];
+	[super tearDown];
 }
 
 - (void)testDictionaryIntoObject {
