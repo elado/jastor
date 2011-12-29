@@ -242,3 +242,5 @@ As for now, `id` is converted to `objectId` automatically. Maybe someday Jastor 
 So you get `initWithCoder`/`encodeWithCoder` for free.
 
 **You can look at the tests for real samples**.
+
+**Created by** [@elado](http://twitter.com/elado)
