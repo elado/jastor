@@ -88,15 +88,23 @@ Class nsArrayClass;
 	return self;
 }
 
-- (NSString *)description {
+- (NSMutableDictionary *)toDictionary {
 	NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-	
-	if (self.objectId) [dic setObject:self.objectId forKey:idPropertyNameOnObject];
+    if (self.objectId) [dic setObject:self.objectId forKey:idPropertyNameOnObject];
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
 		id value = [self valueForKey:key];
-		if (value != nil) [dic setObject:value forKey:key];
+        if (value && [value isKindOfClass:[Jastor class]]) {            
+            [dic setObject:[value toDictionary] forKey:key];
+        } else if (value != nil) {
+            [dic setObject:value forKey:key];
+        }
 	}
+    return dic;
+}
+
+- (NSString *)description {
+    NSMutableDictionary *dic = [self toDictionary];
 	
 	return [NSString stringWithFormat:@"#<%@: id = %@ %@>", [self class], self.objectId, [dic description]];
 }
