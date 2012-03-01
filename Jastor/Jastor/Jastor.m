@@ -60,9 +60,9 @@ Class nsArrayClass;
 - (void)dealloc {
 	self.objectId = nil;
 	
-	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
-		[self setValue:nil forKey:key];
-	}
+//	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
+//		//[self setValue:nil forKey:key];
+//	}
 	
 	[super dealloc];
 }
