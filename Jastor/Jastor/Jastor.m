@@ -16,9 +16,16 @@ Class nsArrayClass;
 	
 	if ((self = [super init])) {
 		for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
+
 			id value = [dictionary valueForKey:key];
 			
-			if (value == [NSNull null] || value == nil) continue;
+			if (value == [NSNull null] || value == nil) {
+                continue;
+            }
+            
+            if ([JastorRuntimeHelper isPropertyReadOnly:[self class] propertyName:key]) {
+                continue;
+            }
 			
 			// handle dictionary
 			if ([value isKindOfClass:nsDictionaryClass]) {
@@ -90,7 +97,9 @@ Class nsArrayClass;
 
 - (NSMutableDictionary *)toDictionary {
 	NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    if (self.objectId) [dic setObject:self.objectId forKey:idPropertyNameOnObject];
+    if (self.objectId) {
+        [dic setObject:self.objectId forKey:idPropertyNameOnObject];
+    }
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
 		id value = [self valueForKey:key];
