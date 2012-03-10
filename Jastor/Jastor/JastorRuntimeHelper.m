@@ -18,9 +18,27 @@ static const char *property_getTypeName(objc_property_t property) {
 
 static NSMutableDictionary *propertyListByClass;
 static NSMutableDictionary *propertyClassByClassAndPropertyName;
++ (BOOL)isPropertyReadOnly:(Class)klass propertyName:(NSString*)propertyName{
+    const char * type = property_getAttributes(class_getProperty(klass, [propertyName UTF8String]));
+    NSString * typeString = [NSString stringWithUTF8String:type];
+    NSArray * attributes = [typeString componentsSeparatedByString:@","];
+//    NSString * typeAttribute = [attributes objectAtIndex:0];
+//    NSString * propertyType = [typeAttribute substringFromIndex:1];
+    NSString * typeAttribute = [attributes objectAtIndex:1];
+
+//    const char * rawPropertyType = [propertyType UTF8String];
+    
+    LGLOG(LGFLAG_JASTORHELPER,@"typeAttribute %@: for property: %@ for class:%@",NSStringFromClass(klass),propertyName,typeAttribute);
+    return [typeAttribute rangeOfString:@"R"].length > 0;
+}
 
 + (NSArray *)propertyNames:(Class)klass {
-	if (!propertyListByClass) propertyListByClass = [[NSMutableDictionary alloc] init];
+    if (klass == [Jastor class]) {
+        return [NSArray array];
+    }
+	if (!propertyListByClass) {
+        propertyListByClass = [[NSMutableDictionary alloc] init];
+    }
 	
 	NSString *className = NSStringFromClass(klass);
 	NSArray *value = [propertyListByClass objectForKey:className];
@@ -29,7 +47,7 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
 		return value; 
 	}
 	
-	NSMutableArray *propertyNames = [[NSMutableArray alloc] init];
+	NSMutableArray *propertyNamesArray = [[[NSMutableArray alloc] init] autorelease];
 	unsigned int propertyCount = 0;
 	objc_property_t *properties = class_copyPropertyList(klass, &propertyCount);
 	
@@ -37,13 +55,14 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
 		objc_property_t property = properties[i];
 		const char * name = property_getName(property);
 		
-		[propertyNames addObject:[NSString stringWithUTF8String:name]];
+		[propertyNamesArray addObject:[NSString stringWithUTF8String:name]];
 	}
 	free(properties);
 	
-	[propertyListByClass setObject:propertyNames forKey:className];
-	
-	return [propertyNames autorelease];
+	[propertyListByClass setObject:propertyNamesArray forKey:className];
+    NSArray* arr = [JastorRuntimeHelper propertyNames:class_getSuperclass(klass)];
+	[propertyNamesArray addObjectsFromArray:arr];
+    return propertyNamesArray;
 }
 
 + (Class)propertyClassForPropertyName:(NSString *)propertyName ofClass:(Class)klass {
