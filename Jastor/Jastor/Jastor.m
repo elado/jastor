@@ -10,6 +10,11 @@ static NSString *idPropertyNameOnObject = @"objectId";
 Class nsDictionaryClass;
 Class nsArrayClass;
 
++ (id)objectFromDictionary:(NSDictionary*)dictionary {
+    id item = [[[self alloc] initWithDictionary:dictionary] autorelease];
+    return item;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (!nsDictionaryClass) nsDictionaryClass = [NSDictionary class];
 	if (!nsArrayClass) nsArrayClass = [NSArray class];
