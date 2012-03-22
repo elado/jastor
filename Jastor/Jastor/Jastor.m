@@ -106,7 +106,7 @@ Class nsArrayClass;
 - (NSMutableDictionary *)toDictionary {
 	NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (self.objectId) {
-        [dic setObject:self.objectId forKey:idPropertyNameOnObject];
+        [dic setObject:self.objectId forKey:idPropertyName];
     }
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
