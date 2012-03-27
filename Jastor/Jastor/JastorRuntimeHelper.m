@@ -22,13 +22,8 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
     const char * type = property_getAttributes(class_getProperty(klass, [propertyName UTF8String]));
     NSString * typeString = [NSString stringWithUTF8String:type];
     NSArray * attributes = [typeString componentsSeparatedByString:@","];
-//    NSString * typeAttribute = [attributes objectAtIndex:0];
-//    NSString * propertyType = [typeAttribute substringFromIndex:1];
     NSString * typeAttribute = [attributes objectAtIndex:1];
 
-//    const char * rawPropertyType = [propertyType UTF8String];
-    
-    LGLOG(LGFLAG_JASTORHELPER,@"typeAttribute %@: for property: %@ for class:%@",NSStringFromClass(klass),propertyName,typeAttribute);
     return [typeAttribute rangeOfString:@"R"].length > 0;
 }
 
