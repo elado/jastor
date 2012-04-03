@@ -42,7 +42,7 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
 		return value; 
 	}
 	
-	NSMutableArray *propertyNamesArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *propertyNamesArray = [NSMutableArray array];
 	unsigned int propertyCount = 0;
 	objc_property_t *properties = class_copyPropertyList(klass, &propertyCount);
 	
@@ -61,7 +61,9 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
 }
 
 + (Class)propertyClassForPropertyName:(NSString *)propertyName ofClass:(Class)klass {
-	if (!propertyClassByClassAndPropertyName) propertyClassByClassAndPropertyName = [[NSMutableDictionary alloc] init];
+	if (!propertyClassByClassAndPropertyName) {
+        propertyClassByClassAndPropertyName = [[NSMutableDictionary alloc] init];
+    }
 	
 	NSString *key = [NSString stringWithFormat:@"%@:%@", NSStringFromClass(klass), propertyName];
 	NSString *value = [propertyClassByClassAndPropertyName objectForKey:key];
@@ -82,11 +84,13 @@ static NSMutableDictionary *propertyClassByClassAndPropertyName;
 			free(properties);
 			NSString *className = [NSString stringWithUTF8String:property_getTypeName(property)];
 			[propertyClassByClassAndPropertyName setObject:className forKey:key];
+            //we found the property - we need to free
 			return NSClassFromString(className);
 		}
 	}
-	free(properties);
-	return nil;
+    free(properties);
+    //this will support traversing the inheritance chain
+	return [self propertyClassForPropertyName:propertyName ofClass:class_getSuperclass(klass)];
 }
 
 @end
