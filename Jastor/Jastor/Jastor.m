@@ -10,6 +10,11 @@ static NSString *idPropertyNameOnObject = @"objectId";
 Class nsDictionaryClass;
 Class nsArrayClass;
 
++ (id)objectFromDictionary:(NSDictionary*)dictionary {
+    id item = [[[self alloc] initWithDictionary:dictionary] autorelease];
+    return item;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (!nsDictionaryClass) nsDictionaryClass = [NSDictionary class];
 	if (!nsArrayClass) nsArrayClass = [NSArray class];
@@ -86,6 +91,9 @@ Class nsArrayClass;
 		[self setValue:[decoder decodeObjectForKey:idPropertyNameOnObject] forKey:idPropertyNameOnObject];
 		
 		for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
+            if ([JastorRuntimeHelper isPropertyReadOnly:[self class] propertyName:key]) {
+                continue;
+            }
 			id value = [decoder decodeObjectForKey:key];
 			if (value != [NSNull null] && value != nil) {
 				[self setValue:value forKey:key];
@@ -98,7 +106,7 @@ Class nsArrayClass;
 - (NSMutableDictionary *)toDictionary {
 	NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (self.objectId) {
-        [dic setObject:self.objectId forKey:idPropertyNameOnObject];
+        [dic setObject:self.objectId forKey:idPropertyName];
     }
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
