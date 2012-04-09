@@ -1,5 +1,6 @@
 #import <objc/runtime.h>
 #import "JastorRuntimeHelper.h"
+#import "Jastor.h"
 
 static const char *property_getTypeName(objc_property_t property) {
 	const char *attributes = property_getAttributes(property);
