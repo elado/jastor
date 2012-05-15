@@ -41,7 +41,7 @@ Class nsArrayClass;
 			else if ([value isKindOfClass:nsArrayClass]) {
 				Class arrayItemType = [[self class] performSelector:NSSelectorFromString([NSString stringWithFormat:@"%@_class", key])];
 				
-				NSMutableArray *childObjects = [NSMutableArray arrayWithCapacity:[value count]];
+				NSMutableArray *childObjects = [NSMutableArray arrayWithCapacity:[(NSArray*)value count]];
 				
 				for (id child in value) {
 					if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
