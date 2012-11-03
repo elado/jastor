@@ -8,7 +8,9 @@ static const char *property_getTypeName(objc_property_t property) {
 	char *state = buffer, *attribute;
 	while ((attribute = strsep(&state, ",")) != NULL) {
 		if (attribute[0] == 'T') {
-			return (const char *)[[NSData dataWithBytes:(attribute + 3) length:strlen(attribute) - 4] bytes];
+			size_t len = strlen(attribute);
+			attribute[len - 1] = '\0';
+			return (const char *)[[NSData dataWithBytes:(attribute + 3) length:len - 2] bytes];
 		}
 	}
 	return "@";
