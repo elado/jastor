@@ -244,3 +244,11 @@ So you get `initWithCoder`/`encodeWithCoder` for free.
 **You can look at the tests for real samples**.
 
 **Created by** [@elado](http://twitter.com/elado)
+
+
+Alternatives
+---
+
+* [KVCObjectMapping](https://github.com/tuyennguyencanada/KVCObjectMapping)
+* [ManagedJastor](https://github.com/patternoia/ManagedJastor) - for `NSManageObject`s
+* [RestKit](http://restkit.org/)
