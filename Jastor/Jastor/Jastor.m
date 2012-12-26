@@ -113,6 +113,17 @@ Class nsArrayClass;
 		id value = [self valueForKey:key];
         if (value && [value isKindOfClass:[Jastor class]]) {            
             [dic setObject:[value toDictionary] forKey:key];
+        } else if (value && [value isKindOfClass:[NSArray class]] && ((NSArray*)value).count > 0) {
+            id internalValue = [value objectAtIndex:0];
+            if (internalValue && [internalValue isKindOfClass:[Jastor class]]) {
+                NSMutableArray *internalItems = [NSMutableArray array];
+                for (id item in value) {
+                    [internalItems addObject:[item toDictionary]];
+                }
+                [dic setObject:internalItems forKey:key];
+            } else {
+                [dic setObject:value forKey:key];
+            }
         } else if (value != nil) {
             [dic setObject:value forKey:key];
         }

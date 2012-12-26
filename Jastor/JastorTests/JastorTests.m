@@ -146,6 +146,5 @@
     
     //comparing the two dictionaries
 	STAssertTrue([[toDictionary JSONString] isEqualToString:[categoryDictionary JSONString]], @"[toDictionary JSONString] should be [categoryDictionary JSONString]");
-	
 }
 @end
