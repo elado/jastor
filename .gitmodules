@@ -1,0 +1,3 @@
+[submodule "Jastor/JastorTests/3rdparty/JSONKIT"]
+	path = Jastor/JastorTests/3rdparty/JSONKIT
+	url = https://github.com/johnezang/JSONKit.git

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A46381DD1503692600EDD842 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = A46381D91503692600EDD842 /* CHANGELOG.md */; };
+		A46381DE1503692600EDD842 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A46381DB1503692600EDD842 /* JSONKit.m */; };
+		A46381DF1503692600EDD842 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A46381DC1503692600EDD842 /* README.md */; };
 		E4E480E31499B821009C36D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E480E21499B821009C36D8 /* Foundation.framework */; };
 		E4E480E91499B821009C36D8 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E480E81499B821009C36D8 /* Jastor.m */; };
 		E4E480F11499B821009C36D8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E480F01499B821009C36D8 /* SenTestingKit.framework */; };
@@ -34,17 +37,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A46381D91503692600EDD842 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		A46381DA1503692600EDD842 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		A46381DB1503692600EDD842 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		A46381DC1503692600EDD842 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E4E480DF1499B821009C36D8 /* libJastor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJastor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E480E21499B821009C36D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4E480E61499B821009C36D8 /* Jastor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jastor-Prefix.pch"; sourceTree = "<group>"; };
-		E4E480E71499B821009C36D8 /* Jastor.h */ = {isa = PBXFileReference; path = Jastor.h; sourceTree = "<group>"; };
+		E4E480E71499B821009C36D8 /* Jastor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Jastor.h; sourceTree = "<group>"; };
 		E4E480E81499B821009C36D8 /* Jastor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
 		E4E480EF1499B821009C36D8 /* JastorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JastorTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E480F01499B821009C36D8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E4E480F21499B821009C36D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		E4E480FA1499B821009C36D8 /* JastorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JastorTests-Info.plist"; sourceTree = "<group>"; };
 		E4E480FC1499B821009C36D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E4E480FE1499B821009C36D8 /* JastorTests.h */ = {isa = PBXFileReference; path = JastorTests.h; sourceTree = "<group>"; };
+		E4E480FE1499B821009C36D8 /* JastorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JastorTests.h; sourceTree = "<group>"; };
 		E4E480FF1499B821009C36D8 /* JastorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JastorTests.m; sourceTree = "<group>"; };
 		E4E4810D1499BBFE009C36D8 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
 		E4E4810E1499BBFE009C36D8 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
@@ -77,6 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A46381D71503692600EDD842 /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				A46381D81503692600EDD842 /* JSONKIT */,
+			);
+			path = 3rdparty;
+			sourceTree = "<group>";
+		};
+		A46381D81503692600EDD842 /* JSONKIT */ = {
+			isa = PBXGroup;
+			children = (
+				A46381D91503692600EDD842 /* CHANGELOG.md */,
+				A46381DA1503692600EDD842 /* JSONKit.h */,
+				A46381DB1503692600EDD842 /* JSONKit.m */,
+				A46381DC1503692600EDD842 /* README.md */,
+			);
+			path = JSONKIT;
+			sourceTree = "<group>";
+		};
 		E4E480D41499B821009C36D8 = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +141,6 @@
 				E4E4810D1499BBFE009C36D8 /* JastorRuntimeHelper.h */,
 				E4E4810E1499BBFE009C36D8 /* JastorRuntimeHelper.m */,
 			);
-			name = Jastor;
 			path = Jastor;
 			sourceTree = "<group>";
 		};
@@ -130,6 +155,7 @@
 		E4E480F81499B821009C36D8 /* JastorTests */ = {
 			isa = PBXGroup;
 			children = (
+				A46381D71503692600EDD842 /* 3rdparty */,
 				E4E481211499CF21009C36D8 /* Product.h */,
 				E4E481221499CF21009C36D8 /* Product.m */,
 				E4E480FE1499B821009C36D8 /* JastorTests.h */,
@@ -234,6 +260,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4E480FD1499B821009C36D8 /* InfoPlist.strings in Resources */,
+				A46381DD1503692600EDD842 /* CHANGELOG.md in Resources */,
+				A46381DF1503692600EDD842 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4E481001499B821009C36D8 /* JastorTests.m in Sources */,
+				A46381DE1503692600EDD842 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

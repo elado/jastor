@@ -8,8 +8,11 @@
 
 @interface Jastor : NSObject <NSCoding>
 
+@property (nonatomic, copy) NSString *objectId;
++ (id)objectFromDictionary:(NSDictionary*)dictionary;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-@property (nonatomic, retain) NSString *objectId;
+- (NSMutableDictionary *)toDictionary;
 
 @end

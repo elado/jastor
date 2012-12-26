@@ -11,6 +11,7 @@
 #import "Jastor.h"
 #import "ProductCategory.h"
 #import "Product.h"
+#import "JSONKit.h"
 
 @implementation JastorTests
 
@@ -131,4 +132,19 @@
 	STAssertTrue([[child1_2_2 name] isEqualToString:@"1.2.2"], @"category.children[1].children[1].name should == '1.2.2'");
 }
 
+- (void)testSerializingNestedTypesIntoJSON {
+	NSMutableDictionary *categoryDictionary = [NSMutableDictionary dictionary];
+	[categoryDictionary setObject:@"1" forKey:@"name"];
+	[categoryDictionary setObject:[self categoryCollectionArrayOfLevel:@"1"] forKey:@"children"];
+    
+	NSMutableDictionary *childCategory1_2 = [[categoryDictionary objectForKey:@"children"] objectAtIndex:1];
+	[childCategory1_2 setObject:[self categoryCollectionArrayOfLevel:@"1.2"] forKey:@"children"];
+	
+	ProductCategory *category = [[ProductCategory alloc] initWithDictionary:categoryDictionary];
+	
+    NSDictionary *toDictionary = [category toDictionary];
+    
+    //comparing the two dictionaries
+	STAssertTrue([[toDictionary JSONString] isEqualToString:[categoryDictionary JSONString]], @"[toDictionary JSONString] should be [categoryDictionary JSONString]");
+}
 @end
