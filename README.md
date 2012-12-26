@@ -228,11 +228,6 @@ Just copy Jastor.m+.h and JastorRuntimeHelper.m+.h to your project, create a cla
 REALLY Good to know
 ---
 
-**Where's the dealloc in the inheritor classes?**
-
-`dealloc` is implemented in the base class and it nilifies all properties.
-
-
 **What about properties that are reserved words?**
 
 As for now, `id` is converted to `objectId` automatically. Maybe someday Jastor will have ability to map server and obj-c fields.
