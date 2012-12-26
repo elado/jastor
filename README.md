@@ -287,6 +287,18 @@ Installation
 Just copy Jastor.m+.h and JastorRuntimeHelper.m+.h to your project, create a class, inherit, use the `initWithDictionary` and enjoy!
 
 
+Testing
+---
+
+Make sure to initialize git submodules.
+
+```bash
+git submodules init
+git submodules update
+```
+
+In Xcode, hit CMD+U under iPhone simulator scheme.
+
 REALLY Good to know
 ---
 
