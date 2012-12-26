@@ -10,6 +10,11 @@ Jastor is NOT a JSON parser. For that, you have [JSONKit](https://github.com/joh
 The name sounds like **JSON to Object**er. Or something.
 
 
+**Upgrade from previous version:**
+
+Add `dealloc` mehtods to your models and nillify your peoperties. Automattic `dealloc` is no longer done by Jastor.
+
+
 Examples
 ---
 
