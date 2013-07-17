@@ -15,4 +15,6 @@
 
 - (NSMutableDictionary *)toDictionary;
 
+- (NSDictionary *)map;
+
 @end
