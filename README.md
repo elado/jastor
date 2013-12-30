@@ -14,6 +14,13 @@ The name sounds like **JSON to Object**er. Or something.
 
 Add `dealloc` mehtods to your models and nillify your peoperties. Automattic `dealloc` is no longer done by Jastor.
 
+Support
+---
+Need help with getting Jastor up and running? Got a time-consuming problem you want to get solved quickly?  
+Get [Jastor support on CodersClan](http://codersclan.net/?repo_id=327).
+
+<p><a href="http://codersclan.net/?repo_id=327"><img src="http://www.codersclan.net/gs_button/?repo_id=327" width="200" /></a></p>
+
 
 Examples
 ---
