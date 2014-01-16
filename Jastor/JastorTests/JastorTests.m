@@ -43,12 +43,16 @@
 	NSDate *date = [NSDate date];
 	[productDictionary setObject:date forKey:@"createdAt"];
 	[productDictionary setObject:[NSNumber numberWithInt:13] forKey:@"amount"];
-	
+	[productDictionary setObject:@[@"sku102",@(99),@{@"key":@"val"}] forKey:@"skuIds"];
+    
 	Product *product = [[Product alloc] initWithDictionary:productDictionary];
 	
 	STAssertEquals(product.createdAt, date, @"date should be date");
 	STAssertEquals([product.amount intValue], 13, @"amount should be 13");
-	
+    STAssertEquals(product.skuIds[0], @"sku102", @"skuId[0] should be skuId102");
+    STAssertEquals([product.skuIds[1] intValue], 99, @"skuId[1] should be 99");
+	STAssertEquals([(NSDictionary*)product.skuIds[2] valueForKey:@"key"], @"val", @"skuId[2]['key'] should be val");
+    
 	[product release];
 }
 
