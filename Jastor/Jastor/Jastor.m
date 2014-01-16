@@ -45,8 +45,12 @@ Class nsArrayClass;
 				for (id child in value) {
                     if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
                         Class arrayItemType = [[self class] performSelector:NSSelectorFromString([NSString stringWithFormat:@"%@_class", key])];
-                        Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
-						[childObjects addObject:childDTO];
+                        if ([arrayItemType isSubclassOfClass:[NSDictionary class]]) {
+                            [childObjects addObject:child];
+                        } else if ([arrayItemType isSubclassOfClass:[Jastor class]]) {
+                            Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
+                            [childObjects addObject:childDTO];
+                        }
 					} else {
 						[childObjects addObject:child];
 					}
