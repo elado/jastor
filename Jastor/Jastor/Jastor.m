@@ -39,13 +39,13 @@ Class nsArrayClass;
 			}
 			// handle array
 			else if ([value isKindOfClass:nsArrayClass]) {
-				Class arrayItemType = [[self class] performSelector:NSSelectorFromString([NSString stringWithFormat:@"%@_class", key])];
 				
 				NSMutableArray *childObjects = [NSMutableArray arrayWithCapacity:[(NSArray*)value count]];
 				
 				for (id child in value) {
-					if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
-						Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
+                    if ([[child class] isSubclassOfClass:nsDictionaryClass]) {
+                        Class arrayItemType = [[self class] performSelector:NSSelectorFromString([NSString stringWithFormat:@"%@_class", key])];
+                        Jastor *childDTO = [[[arrayItemType alloc] initWithDictionary:child] autorelease];
 						[childObjects addObject:childDTO];
 					} else {
 						[childObjects addObject:child];
