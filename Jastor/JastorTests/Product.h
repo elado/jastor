@@ -6,6 +6,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSNumber *amount;
 @property (nonatomic, copy) NSDate *createdAt;
-
+@property (nonatomic, copy) NSArray *skuIds;
 
 @end
