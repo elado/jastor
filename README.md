@@ -290,6 +290,55 @@ category.children // => <NSArray>
 [[[[category.children objectAtIndex:1] children] objectAtIndex:0] name] // => 1.2.1.2
 ```
 
+Custom mapping
+---
+
+If you are receiving a json from a web server:
+
+```json
+{
+	"first_name": "John",
+	"last_name": "Doe"
+}
+```
+
+```objc
+// Person.h
+@interface Person : Jastor
+@property (nonatomic, copy) NSString *firstName;
+@property (nonatomic, copy) NSString *lastName;
+@end
+
+// Person.m
+@implementation Person
+@synthesize firstName, lastName;
+
+- (void)dealloc {
+	[firstName release]; firstName = nil;
+	[lastName release]; lastName = nil;
+
+	[super dealloc];
+}
+
+- (NSDictionary *)map{
+    NSMutableDictionary *map = [NSMutableDictionary dictionaryWithDictionary:[super map]];
+    [map setObject:@"first_name" forKey:@"firstName"];
+    [map setObject:@"last_name" forKey:@"lastName"];
+    return [NSDictionary dictionaryWithDictionary:map];
+}
+
+@end
+
+// Code
+NSDictionary *dictionary = /* parse the JSON response to a dictionary */;
+Person *person = [[Person alloc] initWithDictionary:dictionary];
+
+// Log
+person.firstName // => John
+person.lastName // => Doe
+```
+
+
 How does it work?
 ---
 Runtime API. The class's properties are read in runtime and assigns all values from dictionary to these properties with `NSObject setValue:forKey:`. For Dictionaries, Jastor instantiates a new class, based on the property type, and issues another `initWithDictionary`. Arrays are only a list of items such as strings (which are not converted) or dictionaries (which are treated the same as other dictionaries).

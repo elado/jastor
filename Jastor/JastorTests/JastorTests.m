@@ -11,6 +11,7 @@
 #import "Jastor.h"
 #import "ProductCategory.h"
 #import "Product.h"
+#import "Person.h"
 #import "JSONKit.h"
 
 @implementation JastorTests
@@ -21,6 +22,7 @@
 	[Jastor class];
 	[Product class];
 	[ProductCategory class];
+	[Person class];
 }
 
 - (void)tearDown {
@@ -36,6 +38,20 @@
 	STAssertEquals(product.name, @"foo", @"name should be foo");
 	
 	[product release];
+}
+
+- (void)testDictionaryIntoObjectWithCustomMapping {
+	NSMutableDictionary *personDictionary = [NSMutableDictionary dictionary];
+
+	[personDictionary setObject:@"John" forKey:@"first_name"];
+	[personDictionary setObject:@"Doe" forKey:@"last_name"];
+
+	Person *person = [[Person alloc] initWithDictionary:personDictionary];
+
+	STAssertEquals(person.firstName, @"John", @"first name should be John");
+	STAssertEquals(person.lastName, @"Doe", @"last name should be Doe");
+
+	[person release];
 }
 
 - (void)testDictionaryWithDifferentTypesIntoObject {

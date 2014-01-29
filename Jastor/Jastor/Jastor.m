@@ -21,8 +21,8 @@ Class nsArrayClass;
 	
 	if ((self = [super init])) {
 		for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
-
-			id value = [dictionary valueForKey:key];
+			
+			id value = [dictionary valueForKey:[[self map] valueForKey:key]];
 			
 			if (value == [NSNull null] || value == nil) {
                 continue;
@@ -115,8 +115,8 @@ Class nsArrayClass;
 	
 	for (NSString *key in [JastorRuntimeHelper propertyNames:[self class]]) {
 		id value = [self valueForKey:key];
-        if (value && [value isKindOfClass:[Jastor class]]) {            
-            [dic setObject:[value toDictionary] forKey:key];
+        if (value && [value isKindOfClass:[Jastor class]]) {
+			[dic setObject:[value toDictionary] forKey:[[self map] valueForKey:key]];
         } else if (value && [value isKindOfClass:[NSArray class]] && ((NSArray*)value).count > 0) {
             id internalValue = [value objectAtIndex:0];
             if (internalValue && [internalValue isKindOfClass:[Jastor class]]) {
@@ -124,15 +124,24 @@ Class nsArrayClass;
                 for (id item in value) {
                     [internalItems addObject:[item toDictionary]];
                 }
-                [dic setObject:internalItems forKey:key];
+				[dic setObject:internalItems forKey:[[self map] valueForKey:key]];
             } else {
-                [dic setObject:value forKey:key];
+				[dic setObject:value forKey:[[self map] valueForKey:key]];
             }
         } else if (value != nil) {
-            [dic setObject:value forKey:key];
+			[dic setObject:value forKey:[[self map] valueForKey:key]];
         }
 	}
     return dic;
+}
+
+- (NSDictionary *)map {
+	NSArray *properties = [JastorRuntimeHelper propertyNames:[self class]];
+	NSMutableDictionary *mapDictionary = [[[NSMutableDictionary alloc] initWithCapacity:properties.count] autorelease];
+	for (NSString *property in properties) {
+		[mapDictionary setObject:property forKey:property];
+	}
+	return [NSDictionary dictionaryWithDictionary:mapDictionary];
 }
 
 - (NSString *)description {
