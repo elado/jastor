@@ -1,6 +1,9 @@
 Jastor
 ===
 
+### Jastor is not maintained anymore. No worries, there are some really good alternatives: [JSONModel](https://github.com/icanzilb/JSONModel) or [Mantle](https://github.com/Mantle/Mantle)
+
+
 Jastor is an Objective-C base class that is initialized with a dictionary (probably from your JSON response), and assigns dictionary values to all its (derived class's) typed @properties.
 
 It supports nested types, arrays, NSString, NSNumber, NSDate and more.
